@@ -17,13 +17,13 @@ const Cart = ({ onHideCart }) => {
     };
 
     const cartItemAddHandler = item => {
-
+        cartCtx.addItem({ ...item, amount: 1 });
     };
     const cartItems = cartCtx.items.map((item) => <CartItem
         key={item.id}
         {...item}
-        onAdd={cartItemAddHandler.bind(null, item.id)}
-        onRemove={cartItemRemoveHandler.bind(null, item)} />);
+        onAdd={cartItemAddHandler.bind(null, item)}
+        onRemove={cartItemRemoveHandler.bind(null, item.id)} />);
     return (
         <Modal onClose={onHideCart}>
             <ul className={classes['cart-items']}>{cartItems}</ul>
