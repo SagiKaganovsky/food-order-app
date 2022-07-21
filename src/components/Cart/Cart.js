@@ -3,6 +3,7 @@ import { useContext } from 'react';
 import Modal from '../UI/Modal';
 import CartContext from '../../store/cart-context';
 import CartItem from './CartItem';
+import Checkout from './Checkout';
 
 import classes from './Cart.module.css'
 
@@ -31,6 +32,7 @@ const Cart = ({ onHideCart }) => {
                 <span>Total Amount</span>
                 <span>{totalAmount}</span>
             </div>
+            <Checkout />
             <div className={classes.actions}>
                 <button className={classes['button--alt']} onClick={onHideCart}>Close</button>
                 {hasItems && <button className={classes.button}>Order</button>}
