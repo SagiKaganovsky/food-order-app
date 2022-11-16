@@ -23,8 +23,17 @@ const Cart = ({ onHideCart }) => {
 
     const orderHandler = () => {
         setIsCheckout(true);
-     };
+    };
 
+    const submitOrderHandler = (userData) => {
+        fetch('https://movie-list-c915d-default-rtdb.firebaseio.com/orders.json', {
+            method: 'POST',
+            body: JSON.stringify({
+                user: userData,
+                orderedItems: cartCtx.items
+            })
+        });
+    };
     const cartItems = cartCtx.items.map((item) => <CartItem
         key={item.id}
         {...item}
@@ -37,7 +46,7 @@ const Cart = ({ onHideCart }) => {
                 <span>Total Amount</span>
                 <span>{totalAmount}</span>
             </div>
-           {isCheckout && <Checkout OnCancel={onHideCart}/>} 
+            {isCheckout && <Checkout onConfirm={submitOrderHandler} OnCancel={onHideCart} />}
             <div className={classes.actions}>
                 <button className={classes['button--alt']} onClick={onHideCart}>Close</button>
                 {hasItems && <button className={classes.button} onClick={orderHandler}>Order</button>}
